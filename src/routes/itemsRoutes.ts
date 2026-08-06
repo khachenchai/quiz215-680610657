@@ -72,12 +72,11 @@ router.post("/:userId", authenticateToken, async (req: CustomRequest, res: Respo
 
     const body = req.body as Item;
 
-    console.log(paramUserId);
-    console.log(body);
-
+    // console.log(paramUserId);
+    // console.log(body);
 
     const vldUserId = zUserId.safeParse(paramUserId);
-    const vldBody = zItemPostBody.safeParse(body);
+    // const vldBody = zItemPostBody.safeParse(body);
 
     if (!vldUserId.success) {
       return res.status(400).json({
@@ -137,8 +136,8 @@ router.delete("/:userId", authenticateToken, async (req: CustomRequest, res: Res
 
     const body = req.body;
 
-    console.log(paramUserId);
-    console.log(body);
+    // console.log(paramUserId);
+    // console.log(body);
 
 
     const vldUserId = zUserId.safeParse(paramUserId);
@@ -180,7 +179,7 @@ router.delete("/:userId", authenticateToken, async (req: CustomRequest, res: Res
 
     const deletedItem = items[foundIndex];
 
-    console.log("deletedItem: ", deletedItem);
+    // console.log("deletedItem: ", deletedItem);
 
     items.splice(foundIndex, 1);
 

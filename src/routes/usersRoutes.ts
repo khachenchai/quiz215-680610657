@@ -37,8 +37,6 @@ router.post("/login", (req: Request, res: Response) => {
 
     const token = jwt.sign(payload, jwt_secret, { expiresIn: "10m" });
 
-    //    (optional: save the token as part of User data)
-
     user.tokens = user.tokens ? [...user.tokens, token] : [token];
 
     return res.status(200).json({

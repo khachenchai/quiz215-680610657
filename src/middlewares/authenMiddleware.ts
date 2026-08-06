@@ -10,8 +10,6 @@ export const authenticateToken = (
     res: Response,
     next: NextFunction
 ) => {
-    // 1. check Request if "authorization" header exists
-    //    and container "Bearer ...JWT-Token..."
     const authHeader = req.headers["authorization"];
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return res.status(401).json({
@@ -20,7 +18,6 @@ export const authenticateToken = (
         });
     }
 
-    // 2. extract the "...JWT-Token..." if available
     const token = authHeader && authHeader.split(" ")[1];
     if (token == null)
         return res.status(401).json({
@@ -29,8 +26,6 @@ export const authenticateToken = (
         });
 
     try {
-        // 3. verify token using JWT_SECRET_KEY and
-        //    get payload "user" = { username, studentId, role }
         const jwt_secret = process.env.JWT_SECRET || "this_is_my_secret";
         jwt.verify(token, jwt_secret, (err, user) => {
             if (err)
@@ -39,11 +34,9 @@ export const authenticateToken = (
                     message: "Invalid or expired token",
                 });
 
-            // 4. Attach "user" payload and "other stuffs" to the custom request
             req.user = user as UserPayload;
             req.token = token;
-
-            // 5. Proceed to next middleware or route handler
+            
             next();
         });
     } catch (err) {

@@ -41,7 +41,7 @@ router.get("/:userId", authenticateToken, (req: CustomRequest, res: Response) =>
 
     const filteredItems = items.filter((i: Item) => i.userId === user?.userId);
 
-    console.log("filteredItems: ", filteredItems);
+    // console.log("filteredItems: ", filteredItems);
 
     if (filteredItems.length === 0) {
       return res.status(404).json({

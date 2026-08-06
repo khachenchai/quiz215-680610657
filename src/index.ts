@@ -30,6 +30,12 @@ app.get("/me", (req: Request, res: Response) => {
   res.status(200).json({
     success: true,
     message: "Quiz #2 - API service",
+    data: {
+      studentId: "680610657",
+      firstName: "Khachenchai",
+      lastName: "Jaikla",
+      section: "001"
+    }
   });
 });
 
